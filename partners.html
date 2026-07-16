@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partner with Us — Hire Anywhere</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+  :root {
+    --paper: #F1EBDD;
+    --paper-deep: #E5DCC6;
+    --input: #FBF7EC;
+    --ink: #1A1D1A;
+    --ink-soft: #3A3D38;
+    --ink-mute: #6B6A60;
+    --rule: #C9BFA8;
+    --accent: #B0421C;
+    --accent-deep: #8A3416;
+    --max-w: 1080px;
+    --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "ss01", "cv11";
+  }
+  .wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--gutter); }
+  .page-wrap { max-width: 760px; margin: 0 auto; padding: clamp(4rem,8vw,6rem) clamp(1.5rem,3vw,2rem) clamp(4rem,8vw,6rem); }
+  .page-eyebrow { font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-mute); margin-bottom:1.5rem; }
+  .page-wrap h1 {
+    font-family:'Fraunces',serif; font-variation-settings:"opsz" 144,"SOFT" 50; font-weight:400;
+    font-size:clamp(1.7rem,3.2vw,2.4rem); line-height:1.15; letter-spacing:-0.015em; margin-bottom:.75rem;
+  }
+  .page-wrap h2 {
+    font-family:'Fraunces',serif; font-variation-settings:"opsz" 144,"SOFT" 50; font-weight:400;
+    font-size:clamp(1.7rem,3.2vw,2.4rem); line-height:1.15; letter-spacing:-0.015em; color:var(--ink); margin:2.25rem 0 .6rem;
+  }
+  .page-wrap p { font-size:1rem; line-height:1.8; color:var(--ink-soft); margin-bottom:1rem; }
+  .page-wrap a { color:var(--accent); }
+  .page-wrap a.cta { color: var(--paper); }
+  .page-wrap a.cta:hover { color: var(--paper); }
+
+  /* ---------- Nav ---------- */
+  body > nav { border-bottom: 1px solid var(--rule); padding: 1.5rem 0; }
+  nav .wrap { display: flex; justify-content: space-between; align-items: center; gap: 2rem; }
+  .logo { font-family: 'Fraunces', serif; font-variation-settings: "opsz" 144, "SOFT" 30; font-weight: 500; font-size: 1.4rem; letter-spacing: -0.015em; color: var(--ink); text-decoration: none; display: inline-flex; align-items: baseline; gap: 0.45rem; }
+  .logo .mark { font-style: italic; color: var(--accent); font-weight: 400; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; }
+  .nav-right { display: flex; align-items: center; gap: clamp(1.25rem, 3vw, 2rem); }
+  .nav-link { font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-mute); text-decoration: none; transition: color 0.18s ease; position: relative; display: inline-flex; align-items: center; line-height: 1; }
+  .nav-link:hover { color: var(--ink); }
+  .nav-dropdown { position: relative; display: inline-flex; align-items: center; }
+  .nav-trigger { cursor: pointer; }
+  .nav-trigger .nav-chev { font-size: 9px; color: var(--ink-mute); transition: transform 0.2s ease, color 0.18s ease; display: inline-block; transform: translateY(-1px); }
+  .nav-trigger:hover .nav-chev, .nav-trigger[aria-expanded="true"] .nav-chev { color: var(--accent); }
+  .nav-trigger[aria-expanded="true"] .nav-chev { transform: translateY(-1px) rotate(180deg); }
+  .nav-trigger[aria-expanded="true"] { color: var(--ink); }
+  .nav-menu { position: absolute; top: calc(100% + 0.95rem); right: 0; min-width: 260px; background: var(--paper); border: 1px solid var(--rule); box-shadow: 4px 4px 0 var(--paper-deep), 4px 4px 0 1px var(--rule); padding: 0.5rem 0; opacity: 0; visibility: hidden; transform: translateY(-4px); transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease; z-index: 50; }
+  .nav-menu::before { content: ""; position: absolute; top: -5px; right: 1.5rem; width: 8px; height: 8px; background: var(--paper); border-top: 1px solid var(--rule); border-left: 1px solid var(--rule); transform: rotate(45deg); }
+  .nav-dropdown.is-open .nav-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+  .nav-menu-item { display: block; padding: 0.85rem 1.25rem; text-decoration: none; color: var(--ink); transition: background 0.15s ease; border-left: 2px solid transparent; }
+  .nav-menu-item:hover { background: var(--paper-deep); border-left-color: var(--accent); }
+  .nav-menu-title { display: block; font-family: 'Fraunces', serif; font-variation-settings: "opsz" 144, "SOFT" 50; font-weight: 500; font-size: 1rem; letter-spacing: -0.01em; color: var(--ink); margin-bottom: 0.15rem; }
+  .nav-menu-meta { display: block; font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); }
+  .cta { display: inline-block; background: var(--ink); color: var(--paper); padding: 0.8rem 1.35rem; font-size: 14px; font-weight: 500; text-decoration: none; letter-spacing: 0.01em; transition: background 0.18s ease, border-color 0.18s ease; border: 1px solid var(--ink); font-family: 'Geist', sans-serif; cursor: pointer; }
+  .cta:hover { background: var(--accent); border-color: var(--accent); }
+  @media (max-width: 540px) { .nav-right { gap: 1rem; } .nav-cta-hide { display: none; } .nav-menu { min-width: 230px; } }
+  @media (max-width: 768px) { .nav-right { display: none !important; } }
+
+  /* ---------- Footer ---------- */
+  footer.site-footer { background: var(--ink) !important; color: #C9BFA8 !important; padding: clamp(2.5rem,5vw,4rem) clamp(1.5rem,5vw,4rem) !important; border-top: none; }
+  .footer-inner { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 1.75rem 3rem; max-width: 1120px; margin: 0 auto; }
+  .footer-brand { flex: 1 1 200px; }
+  .footer-logo { font-family: 'Fraunces', serif; font-size: 1.1rem; color: #F1EBDD !important; text-decoration: none; display: inline-flex; align-items: baseline; gap: .4rem; }
+  .footer-logo .mark { color: var(--accent); font-style: italic; }
+  .footer-copy { font-family: 'Geist Mono', monospace; font-size: .75rem; letter-spacing: .08em; color: #6B6A60; margin-top: .5rem; }
+  .footer-nav, .footer-legal { display: flex; flex-wrap: wrap; gap: .6rem 1.75rem; align-items: center; }
+  .footer-nav { flex: 2 1 380px; }
+  .footer-nav a, .footer-legal a { font-family: 'Geist', system-ui, sans-serif; font-size: .85rem; color: #C9BFA8 !important; text-decoration: none; transition: color .2s; }
+  .footer-nav a:hover, .footer-legal a:hover { color: var(--accent) !important; }
+  @media (max-width: 640px) { .footer-inner { flex-direction: column; gap: 1.25rem; } }
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a href="index.html" class="logo"><span class="mark">§</span>Hire Anywhere</a>
+    <div class="nav-right">
+      <a href="success-stories.html" class="nav-link">Success stories</a>
+      <div class="nav-dropdown">
+        <span class="nav-link nav-trigger" role="button" tabindex="0" aria-expanded="false" aria-haspopup="true" aria-controls="guides-menu">
+          Guides <span class="nav-chev" aria-hidden="true">▾</span>
+        </span>
+        <div class="nav-menu" id="guides-menu" role="menu">
+          <a href="salary-guide.html" class="nav-menu-item" role="menuitem">
+            <span class="nav-menu-title">Salary Guide</span>
+            <span class="nav-menu-meta">UK vs Overseas · 12 roles</span>
+          </a>
+        </div>
+      </div>
+      <a href="start-hiring.html" class="cta nav-cta-hide">Start hiring</a>
+    </div>
+  </div>
+</nav>
+<div class="page-wrap">
+  <p class="page-eyebrow">Referral Programme</p>
+  <h1>Partner with us.</h1>
+  <p style="color:var(--ink-mute);max-width:600px;margin-bottom:2.5rem">We work with accountants, fractional CFOs and business advisors who advise UK founder-led businesses. If your clients are growing and stretched on headcount, we can help — and we pay a referral fee on every placement.</p>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--rule);margin-bottom:3rem">
+    <div style="padding:1.75rem 1.75rem 1.75rem 0;border-right:1px solid var(--rule)">
+      <p style="font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:.6rem">Referral fee</p>
+      <p style="font-family:'Fraunces',serif;font-size:1.8rem;color:var(--ink);line-height:1">10%</p>
+      <p style="font-size:.85rem;color:var(--ink-mute);margin-top:.4rem">of first-year placement fee</p>
+    </div>
+    <div style="padding:1.75rem;border-right:1px solid var(--rule)">
+      <p style="font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:.6rem">When paid</p>
+      <p style="font-family:'Fraunces',serif;font-size:1.8rem;color:var(--ink);line-height:1">30 days</p>
+      <p style="font-size:.85rem;color:var(--ink-mute);margin-top:.4rem">after invoice clears</p>
+    </div>
+    <div style="padding:1.75rem 0 1.75rem 1.75rem">
+      <p style="font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:.6rem">Upfront cost</p>
+      <p style="font-family:'Fraunces',serif;font-size:1.8rem;color:var(--ink);line-height:1">£0</p>
+      <p style="font-size:.85rem;color:var(--ink-mute);margin-top:.4rem">no cost to refer</p>
+    </div>
+  </div>
+  <h2>Book an intro call</h2>
+  <p>The easiest way to start is a 20-minute call. Pick a time and we'll walk you through how the programme works.</p>
+  <div style="margin:2rem 0;padding:2rem;border:1px solid var(--rule);background:var(--paper-deep);text-align:center">
+    <p style="font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:1rem">Book a partner intro call</p>
+    <a href="https://hireanywhere2.zohobookings.com/#/partners" target="_blank" rel="noopener" class="cta" style="display:inline-block">Choose a time →</a>
+    <p style="font-size:.8rem;color:var(--ink-mute);margin-top:1rem">20 mins · no commitment</p>
+  </div>
+  <p>Prefer to message first? <a href="contact.html">Get in touch</a>.</p>
+</div>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="index.html" class="logo footer-logo"><span class="mark">§</span>Hire Anywhere</a>
+      <p class="footer-copy">© 2026 Hire Anywhere</p>
+    </div>
+    <nav class="footer-nav" aria-label="Pages">
+      <a href="index.html">Home</a>
+      <a href="success-stories.html">Success stories</a>
+      <a href="salary-guide.html">Salary guide</a>
+      <a href="careers.html">Careers</a>
+      <a href="contact.html">Contact us</a>
+      <a href="partners.html">Partner with us</a>
+    </nav>
+    <nav class="footer-legal" aria-label="Legal">
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+    </nav>
+  </div>
+</footer>
+<script>
+(function(){
+  var t=document.querySelector('.nav-trigger'),d=document.querySelector('.nav-dropdown');
+  if(t&&d){
+    t.addEventListener('click',function(e){e.stopPropagation();d.classList.toggle('is-open');t.setAttribute('aria-expanded',d.classList.contains('is-open'));});
+    t.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();d.classList.toggle('is-open');t.setAttribute('aria-expanded',d.classList.contains('is-open'));}});
+    document.addEventListener('click',function(){if(d)d.classList.remove('is-open');});
+  }
+})();
+</script>
+</body>
+</html>

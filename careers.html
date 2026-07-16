@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hire Anywhere — Find a remote role that actually fits</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300;9..144,400;9..144,500;9..144,600&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --paper: #F1EBDD;
+    --paper-deep: #E5DCC6;
+    --ink: #1A1D1A;
+    --ink-soft: #3A3D38;
+    --ink-mute: #6B6A60;
+    --rule: #C9BFA8;
+    --accent: #B0421C;
+    --accent-deep: #8A3416;
+    --linen: #EEE9E1;
+    --stone: #DDD7CC;
+    --pebble: #C4BEB4;
+    --clay: #6E6659;
+    --bark: #3A352E;
+    --soil: #2A2623;
+    --border: rgba(42,38,35,0.12);
+    --border-soft: rgba(42,38,35,0.07);
+    --serif: 'Fraunces', Georgia, serif;
+    --sans:  'Geist', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--paper);
+    color: var(--bark);
+    line-height: 1.7;
+    font-size: 16px;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 2.5rem); }
+
+  /* ---------- Nav (shared site template) ---------- */
+  body > nav { border-bottom: 1px solid var(--rule); padding: 1.5rem 0; background: var(--paper); position: sticky; top: 0; z-index: 100; }
+  nav .wrap { display: flex; justify-content: space-between; align-items: center; gap: 2rem; }
+  .logo {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 144, "SOFT" 30;
+    font-weight: 500;
+    font-size: 1.4rem;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.45rem;
+  }
+  .logo .mark {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 400;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .nav-right { display: flex; align-items: center; gap: clamp(1.25rem, 3vw, 2rem); }
+  .nav-link {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    text-decoration: none;
+    transition: color 0.18s ease;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+  }
+  .nav-link:hover { color: var(--ink); }
+  .nav-dropdown { position: relative; display: inline-flex; align-items: center; }
+  .nav-trigger { cursor: pointer; }
+  .nav-trigger .nav-chev { font-size: 9px; color: var(--ink-mute); transition: transform 0.2s ease, color 0.18s ease; display: inline-block; transform: translateY(-1px); }
+  .nav-trigger:hover .nav-chev, .nav-trigger[aria-expanded="true"] .nav-chev { color: var(--accent); }
+  .nav-trigger[aria-expanded="true"] .nav-chev { transform: translateY(-1px) rotate(180deg); }
+  .nav-trigger[aria-expanded="true"] { color: var(--ink); }
+  .nav-menu {
+    position: absolute; top: calc(100% + 0.95rem); right: 0; min-width: 260px; background: var(--paper);
+    border: 1px solid var(--rule); box-shadow: 4px 4px 0 var(--paper-deep), 4px 4px 0 1px var(--rule);
+    padding: 0.5rem 0; opacity: 0; visibility: hidden; transform: translateY(-4px);
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease; z-index: 50;
+  }
+  .nav-menu::before {
+    content: ""; position: absolute; top: -5px; right: 1.5rem; width: 8px; height: 8px;
+    background: var(--paper); border-top: 1px solid var(--rule); border-left: 1px solid var(--rule); transform: rotate(45deg);
+  }
+  .nav-dropdown.is-open .nav-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+  .nav-menu-item { display: block; padding: 0.85rem 1.25rem; text-decoration: none; color: var(--ink); transition: background 0.15s ease; border-left: 2px solid transparent; }
+  .nav-menu-item:hover { background: var(--paper-deep); border-left-color: var(--accent); }
+  .nav-menu-title { display: block; font-family: 'Fraunces', serif; font-variation-settings: "opsz" 144, "SOFT" 50; font-weight: 500; font-size: 1rem; letter-spacing: -0.01em; color: var(--ink); margin-bottom: 0.15rem; }
+  .nav-menu-meta { display: block; font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); }
+  .cta { display: inline-block; background: var(--ink); color: var(--paper); padding: 0.8rem 1.35rem; font-size: 14px; font-weight: 500; text-decoration: none; letter-spacing: 0.01em; transition: background 0.18s ease, border-color 0.18s ease; border: 1px solid var(--ink); font-family: 'Geist', sans-serif; cursor: pointer; }
+  .cta:hover { background: var(--accent); border-color: var(--accent); }
+  @media (max-width: 540px) { .nav-right { gap: 1rem; } .nav-cta-hide { display: none; } .nav-menu { min-width: 230px; } }
+  @media (max-width: 768px) { .nav-right { display: none !important; } }
+
+  /* LAYOUT */
+  section { padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 4rem); }
+  .container        { max-width: 1120px; margin: 0 auto; }
+  .container-narrow { max-width: 760px;  margin: 0 auto; }
+  .container-mid    { max-width: 920px;  margin: 0 auto; }
+
+  .section-label { font-size: 0.75rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clay); margin-bottom: 2.5rem; }
+
+  /* HERO */
+  #hero {
+    padding: clamp(5rem, 12vw, 10rem) clamp(1.5rem, 5vw, 4rem) clamp(4rem, 8vw, 7rem);
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .hero-tag { display: inline-block; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--clay); border: 1px solid var(--border); background: var(--linen); padding: 0.35rem 0.85rem; border-radius: 2px; margin-bottom: 2.5rem; }
+  h1 { font-family: 'Fraunces', serif; font-variation-settings: "opsz" 144, "SOFT" 50; font-size: clamp(2.4rem, 5.6vw, 4.2rem); line-height: 1.05; letter-spacing: -0.02em; color: var(--soil); font-weight: 400; margin-bottom: 1.75rem; }
+  .hero-sub { font-size: clamp(1rem, 1.5vw, 1.125rem); color: var(--clay); line-height: 1.75; max-width: 620px; margin-bottom: 3rem; font-weight: 300; }
+  .cta-group { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+  .btn-primary { font-family: var(--sans); font-size: 0.9rem; font-weight: 400; letter-spacing: 0.01em; color: var(--paper); background: var(--soil); border: 1px solid var(--soil); padding: 0.8rem 1.75rem; border-radius: 2px; cursor: pointer; text-decoration: none; transition: opacity 0.2s; display: inline-block; }
+  .btn-primary:hover { opacity: 0.82; }
+  .btn-secondary { font-family: var(--sans); font-size: 0.9rem; font-weight: 400; letter-spacing: 0.01em; color: var(--bark); background: transparent; border: 1px solid var(--border); padding: 0.8rem 1.75rem; border-radius: 2px; cursor: pointer; text-decoration: none; transition: border-color 0.2s, background 0.2s; }
+  .btn-secondary:hover { background: var(--linen); border-color: var(--pebble); }
+
+  /* TYPOGRAPHY */
+  h2 { font-family: var(--serif); font-size: clamp(1.7rem, 3.2vw, 2.4rem); font-weight: 400; color: var(--soil); letter-spacing: -0.015em; line-height: 1.15; margin-bottom: 1.25rem; }
+  h3 { font-family: var(--sans); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--soil); margin-bottom: 0.75rem; }
+
+  /* ORIGIN STRIP */
+  #origin { background: var(--linen); border-bottom: 1px solid var(--border-soft); padding: 1rem clamp(1.5rem, 5vw, 4rem); }
+  .origin-inner { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--clay); font-weight: 300; flex-wrap: wrap; }
+  .origin-inner span { color: var(--pebble); }
+
+  /* PROBLEM */
+  #problem { background: var(--linen); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); }
+  .problem-origin-note { font-size: 0.875rem; color: var(--bark); font-weight: 300; font-style: italic; font-family: var(--serif); background: var(--stone); border-left: 3px solid var(--pebble); padding: 0.85rem 1.1rem; border-radius: 0 2px 2px 0; margin-bottom: 2.5rem; max-width: 700px; line-height: 1.65; }
+  .pain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px; border: 1px solid var(--stone); background: var(--stone); margin-bottom: 0; }
+  .pain-card { background: var(--linen); padding: 2rem 1.75rem; }
+  .pain-point-title { font-family: var(--sans); font-size: 0.975rem; font-weight: 400; color: var(--soil); margin-bottom: 0.6rem; line-height: 1.5; }
+  .pain-point-text { font-size: 0.875rem; color: var(--clay); line-height: 1.7; font-weight: 300; }
+
+  /* APPROACH */
+  #approach { background: var(--paper); }
+  .approach-intro { font-size: 1rem; color: var(--clay); line-height: 1.8; max-width: 640px; margin-bottom: 3.5rem; font-weight: 300; }
+  .approach-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+  .approach-card { border: 1px solid var(--stone); border-radius: 2px; padding: 1.75rem; background: var(--paper); transition: border-color 0.2s, background 0.2s; }
+  .approach-card:hover { border-color: var(--pebble); background: var(--linen); }
+  .approach-card p { font-size: 0.875rem; color: var(--clay); line-height: 1.7; font-weight: 300; }
+  .approach-closing { font-family: var(--serif); font-size: 1.05rem; color: var(--clay); font-style: italic; line-height: 1.65; border-top: 1px solid var(--border-soft); padding-top: 2rem; margin-top: 3rem; text-align: justify; }
+
+  /* STAY CONNECTED */
+  #stay { background: var(--linen); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); }
+  .stay-inner { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(3rem, 6vw, 6rem); align-items: start; }
+  @media (max-width: 700px) { .stay-inner { grid-template-columns: 1fr; } }
+  #stay h2 { margin-bottom: 1.25rem; }
+  .stay-body { font-size: 1rem; color: var(--clay); line-height: 1.8; font-weight: 300; }
+  .stay-body p + p { margin-top: 1rem; }
+  .stay-body .btn-primary { margin-top: 2rem; }
+  .stay-employed-note { font-size: 0.875rem; color: var(--clay); border-left: 2px solid var(--stone); padding-left: 0.85rem; line-height: 1.65; font-weight: 300; }
+  .stay-how { padding-top: 0.5rem; }
+  .stay-how-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pebble); margin-bottom: 1.25rem; }
+  .stay-how-title { font-family: var(--serif); font-size: 1.3rem; color: var(--soil); font-weight: 400; margin-bottom: 1.25rem; line-height: 1.3; letter-spacing: -0.01em; }
+  .stay-steps { display: flex; flex-direction: column; gap: 0; }
+  .stay-step { display: flex; gap: 1.25rem; align-items: flex-start; padding: 1.1rem 0; border-bottom: 1px solid var(--border-soft); }
+  .stay-step:first-child { border-top: 1px solid var(--border-soft); }
+  .stay-step-num { font-family: var(--serif); font-size: 1rem; color: var(--pebble); font-style: italic; flex-shrink: 0; padding-top: 0.05rem; min-width: 2rem; }
+  .stay-step-title { font-size: 0.875rem; font-weight: 500; color: var(--soil); margin-bottom: 0.25rem; }
+  .stay-step-body { font-size: 0.85rem; color: var(--clay); line-height: 1.65; font-weight: 300; }
+
+  /* WHAT WE BUILD */
+  #build { background: var(--paper); }
+  .build-intro { font-size: 1rem; color: var(--clay); line-height: 1.75; margin-bottom: 3.5rem; font-weight: 300; max-width: 600px; }
+  .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 3rem; }
+  @media (max-width: 640px) { .comparison-grid { grid-template-columns: 1fr; } }
+  .comparison-col { padding: 2rem 1.75rem; border: 1px solid var(--stone); border-radius: 2px; }
+  .col-aligned { background: var(--linen); }
+  .col-notfit  { background: var(--paper); }
+  .comparison-col-title { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bark); margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--stone); }
+  .comparison-col ul { list-style: none; }
+  .comparison-col ul li { font-size: 0.875rem; color: var(--clay); padding: 0.55rem 0; border-bottom: 1px solid var(--border-soft); line-height: 1.5; font-weight: 300; }
+  .comparison-col ul li:last-child { border-bottom: none; }
+  .comparison-col ul li::before { content: '—'; color: var(--pebble); margin-right: 0.6rem; font-size: 0.8rem; }
+  .closing-line { font-family: var(--serif); font-size: 1.05rem; line-height: 1.65; color: var(--clay); font-style: italic; border-top: 1px solid var(--border-soft); padding-top: 2rem; }
+
+  /* PROCESS */
+  #process { background: var(--linen); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); }
+  .process-steps { margin-bottom: 3rem; }
+  .step { display: grid; grid-template-columns: 3rem 1fr; gap: 1.5rem; padding: 1.75rem 0; border-bottom: 1px solid var(--border-soft); align-items: start; }
+  .step:first-child { border-top: 1px solid var(--border-soft); }
+  .step-num { font-family: var(--serif); font-size: 1.1rem; color: var(--pebble); padding-top: 0.1rem; font-weight: 400; font-style: italic; }
+  .step-content h3 { font-size: 0.85rem; color: var(--soil); margin-bottom: 0.4rem; font-family: var(--sans); font-weight: 500; letter-spacing: 0.03em; text-transform: none; }
+  .step-content p { font-size: 0.875rem; color: var(--clay); line-height: 1.7; font-weight: 300; }
+  .step-content p + p { margin-top: 0.5rem; }
+  .process-note { font-size: 0.875rem; color: var(--clay); font-style: italic; font-family: var(--serif); font-weight: 400; }
+
+  /* TESTIMONIALS */
+  #testimonials { background: var(--linen); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); }
+  .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 2.5rem; }
+  .testimonial-card { border: 1px solid var(--stone); border-radius: 2px; padding: 1.75rem; background: var(--paper); }
+  .testimonial-quote { font-family: var(--serif); font-size: 1rem; color: var(--soil); line-height: 1.75; font-style: italic; margin-bottom: 1.25rem; }
+  .testimonial-attr { font-size: 0.78rem; color: var(--clay); letter-spacing: 0.04em; font-weight: 300; }
+
+  /* FAQ */
+  #faq { background: var(--paper); }
+  .faq-list { margin-top: 2rem; }
+  .faq-item { border-bottom: 1px solid var(--border-soft); }
+  .faq-item:first-child { border-top: 1px solid var(--border-soft); }
+  .faq-question { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 0; cursor: pointer; gap: 1rem; list-style: none; }
+  .faq-question::-webkit-details-marker { display: none; }
+  .faq-q-text { font-size: 0.95rem; font-weight: 400; color: var(--soil); line-height: 1.5; }
+  .faq-icon { flex-shrink: 0; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; color: var(--clay); font-size: 1.1rem; font-weight: 300; transition: transform 0.25s; user-select: none; }
+  details[open] .faq-icon { transform: rotate(45deg); }
+  .faq-answer { font-size: 0.875rem; color: var(--clay); line-height: 1.8; padding-bottom: 1.5rem; max-width: 680px; font-weight: 300; }
+  .faq-answer p + p { margin-top: 0.75rem; }
+  .faq-answer ul { margin: 0.5rem 0 0 1rem; }
+  .faq-answer ul li { margin-bottom: 0.3rem; }
+
+  /* ---------- Footer (shared site template) ---------- */
+  footer { background: var(--ink); color: #C9BFA8; padding: clamp(2.5rem,5vw,4rem) clamp(1.5rem,5vw,4rem); }
+  footer.site-footer { background: var(--ink) !important; color: #C9BFA8 !important; padding: clamp(2.5rem,5vw,4rem) clamp(1.5rem,5vw,4rem) !important; border-top: none; }
+  .footer-inner { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 1.75rem 3rem; max-width: 1120px; margin: 0 auto; }
+  .footer-brand { flex: 1 1 200px; }
+  .footer-logo { font-family: 'Fraunces', serif; font-size: 1.1rem; color: #F1EBDD !important; text-decoration: none; display: inline-flex; align-items: baseline; gap: .4rem; }
+  .footer-logo .mark { color: var(--accent); font-style: italic; }
+  .footer-copy { font-family: 'Geist Mono', monospace; font-size: .75rem; letter-spacing: .08em; color: #6B6A60; margin-top: .5rem; }
+  .footer-nav, .footer-legal { display: flex; flex-wrap: wrap; gap: .6rem 1.75rem; align-items: center; }
+  .footer-nav { flex: 2 1 380px; }
+  .footer-nav a, .footer-legal a { font-family: 'Geist', system-ui, sans-serif; font-size: .85rem; color: #C9BFA8 !important; text-decoration: none; transition: color .2s; }
+  .footer-nav a:hover, .footer-legal a:hover { color: var(--accent) !important; }
+  @media (max-width: 640px) { .footer-inner { flex-direction: column; gap: 1.25rem; } }
+
+  @media (max-width: 768px) {
+    .footer-inner { flex-direction: column; align-items: flex-start; }
+  }
+
+  /* CANDIDATE FORM */
+  #candidate-form { background: var(--linen); border-top: 1px solid var(--border-soft); }
+  .candidate-form-intro { font-size: 1rem; color: var(--clay); line-height: 1.75; max-width: 46ch; margin-bottom: 2.5rem; font-weight: 300; }
+  .candidate-field { margin-bottom: 1.25rem; }
+  .candidate-field label { display: block; font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--bark); margin-bottom: 0.55rem; }
+  .candidate-field label .req { color: var(--accent); }
+  .candidate-field label .opt { color: var(--clay); text-transform: none; letter-spacing: 0; font-weight: 300; }
+  .candidate-field input {
+    width: 100%; background: var(--paper); border: 1px solid var(--stone); padding: 0.75rem 0.85rem;
+    font-family: 'Geist', system-ui, sans-serif; font-size: 0.95rem; color: var(--ink); border-radius: 2px; box-sizing: border-box;
+    outline: none; transition: border-color 0.18s ease;
+  }
+  .candidate-field input:focus { border-color: var(--accent); }
+  .candidate-submit { width: 100%; margin-top: 0.5rem; }
+  .candidate-fineprint { font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clay); text-align: center; margin-top: 0.85rem; }
+  #candidateSuccess { display: none; text-align: center; padding: 2rem 0; }
+  #candidateSuccess h2 { margin-bottom: 0.5rem; }
+  #candidateSuccess p { color: var(--clay); }
+</style>
+</head>
+<body>
+
+<!-- NAV (shared template) -->
+<nav>
+  <div class="wrap">
+    <a href="index.html" class="logo"><span class="mark">§</span>Hire Anywhere</a>
+    <div class="nav-right">
+      <a href="success-stories.html" class="nav-link">Success stories</a>
+      <div class="nav-dropdown">
+        <span class="nav-link nav-trigger" role="button" tabindex="0" aria-expanded="false" aria-haspopup="true" aria-controls="guides-menu">
+          Guides <span class="nav-chev" aria-hidden="true">▾</span>
+        </span>
+        <div class="nav-menu" id="guides-menu" role="menu">
+          <a href="salary-guide.html" class="nav-menu-item" role="menuitem">
+            <span class="nav-menu-title">Salary Guide</span>
+            <span class="nav-menu-meta">UK vs Overseas · 12 roles</span>
+          </a>
+        </div>
+      </div>
+      <a href="start-hiring.html" class="cta nav-cta-hide">Start hiring</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container-narrow">
+    <span class="hero-tag">Filipino Professionals — UK Businesses</span>
+    <h1>Find a remote role that actually fits</h1>
+    <p class="hero-sub">We work with professionals who are ready for the next stage in their career — not just their next job. Long-term remote roles with UK businesses that value clarity, collaboration, and genuine fit.</p>
+    <div class="cta-group">
+      <a href="#candidate-form" class="btn-primary">Be Considered for Future Roles</a>
+    </div>
+  </div>
+</section>
+
+<!-- ORIGIN STRIP -->
+<div id="origin">
+  <div class="origin-inner">
+    A UK-founded recruitment company with on-the-ground experience in Manila — built to bridge the gap between Filipino professionals and UK businesses thoughtfully.
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="container">
+    <p class="section-label">01 — The Problem</p>
+    <h2>Finding remote work on your own can feel unclear</h2>
+    <p class="problem-origin-note">These patterns come up repeatedly in conversations with Filipino professionals — and they're part of why we built Hire Anywhere the way we did, with real context from both the UK and the overseas informing how we work.</p>
+
+    <div class="pain-grid">
+      <div class="pain-card">
+        <p class="pain-point-title">You apply without really knowing what the role or company is actually like</p>
+        <p class="pain-point-text">A lot of job posts sound promising at first, but give very little real context about the business, team, or day-to-day work.</p>
+      </div>
+      <div class="pain-card">
+        <p class="pain-point-title">The hiring process can feel inconsistent and unclear</p>
+        <p class="pain-point-text">Some companies communicate well in the beginning, then suddenly disappear, delay updates, or leave you guessing about what's happening next.</p>
+      </div>
+      <div class="pain-card">
+        <p class="pain-point-title">What gets discussed during interviews doesn't always match the actual role</p>
+        <p class="pain-point-text">Responsibilities, expectations, or working styles sometimes change once the job starts, leaving candidates feeling caught off guard.</p>
+      </div>
+      <div class="pain-card">
+        <p class="pain-point-title">It's hard to tell whether a role is genuinely long-term or just a quick hire</p>
+        <p class="pain-point-text">Some companies hire reactively without clear structure, which can lead to unstable roles or short-lived working relationships.</p>
+      </div>
+      <div class="pain-card">
+        <p class="pain-point-title">You don't always know how UK employers actually work day-to-day</p>
+        <p class="pain-point-text">Communication styles, expectations, and team culture in the UK can differ significantly — and candidates are often left figuring this out on their own after joining.</p>
+      </div>
+      <div class="pain-card">
+        <p class="pain-point-title">Even good candidates can end up feeling like "just support"</p>
+        <p class="pain-point-text">Instead of becoming part of a team, some remote workers end up stuck doing disconnected tasks without proper collaboration, clarity, or growth.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section id="approach">
+  <div class="container">
+    <p class="section-label">02 — Our Approach</p>
+    <h2>This is where we approach things differently</h2>
+
+    <p class="approach-intro">We've seen how frustrating remote hiring can feel when expectations aren't clear, communication is inconsistent, or candidates are left figuring things out on their own.<br><br>That's why we're trying to build a more thoughtful process — one shaped by lived experience from both the UK and the overseas, with long-term fit in mind from the start.</p>
+
+    <div class="approach-grid">
+      <div class="approach-card">
+        <h3>Clearer Role Context</h3>
+        <p>You should understand what the role actually involves — not just the job title, but the team, the working style, and what's expected day-to-day — before you move forward, and before you accept an offer.</p>
+      </div>
+      <div class="approach-card">
+        <h3>Better Expectation Alignment</h3>
+        <p>We work with businesses to define responsibilities, communication, and working styles more clearly from the start — so there are fewer surprises after you join.</p>
+      </div>
+      <div class="approach-card">
+        <h3>Transparent Communication</h3>
+        <p>You shouldn't be left guessing where you stand. We keep you informed throughout the process, even when there isn't an immediate update.</p>
+      </div>
+      <div class="approach-card">
+        <h3>Long-Term Thinking</h3>
+        <p>We focus on stable, long-term opportunities rather than rushed placements. The roles we work on are ones where you become a proper part of a team.</p>
+      </div>
+      <div class="approach-card">
+        <h3>Real Business Context</h3>
+        <p>We give candidates clearer insight into the company, team, and how UK businesses actually operate day-to-day — so you're not figuring it out alone after you start.</p>
+      </div>
+      <div class="approach-card">
+        <h3>Relationship-Driven Matching</h3>
+        <p>We care more about long-term fit and alignment than filling roles quickly. If it's not the right match, we'd rather wait for one that is.</p>
+      </div>
+    </div>
+
+    <p class="approach-closing">Not every opportunity will be the right fit — and that's okay. We'd rather create stronger long-term matches than rush people into the wrong roles.</p>
+  </div>
+</section>
+
+<!-- STAY CONNECTED + HOW IT WORKS -->
+<section id="stay">
+  <div class="container">
+    <div class="stay-inner">
+      <div>
+        <h2>Didn't find the right role? You can still be considered.</h2>
+        <div class="stay-body">
+          <p>If nothing here fits right now, you can put yourself forward and we'll keep your profile in mind for future roles that match your experience and goals.</p>
+          <p class="stay-employed-note">Already employed? That's fine too. A lot of the people we speak to aren't urgently searching — they're just open to something better when it comes along.</p>
+          <a href="#candidate-form" class="btn-primary">Be Considered for Future Roles</a>
+        </div>
+      </div>
+      <div class="stay-how">
+        <p class="stay-how-label">What happens after you apply</p>
+        <p class="stay-how-title">How this works — honestly</p>
+        <div class="stay-steps">
+          <div class="stay-step">
+            <span class="stay-step-num">01</span>
+            <div>
+              <p class="stay-step-title">We review your background</p>
+              <p class="stay-step-body">If there's a potential fit, we'll follow up for a short conversation about your experience, goals, and working style.</p>
+            </div>
+          </div>
+          <div class="stay-step">
+            <span class="stay-step-num">02</span>
+            <div>
+              <p class="stay-step-title">We keep you informed</p>
+              <p class="stay-step-body">While you wait, we share occasional updates — roles we've placed, what the process looked like, and what UK businesses are currently looking for. Not job alerts. Just context.</p>
+            </div>
+          </div>
+          <div class="stay-step">
+            <span class="stay-step-num">03</span>
+            <div>
+              <p class="stay-step-title">We reach out when it's right</p>
+              <p class="stay-step-body">Not everyone will hear from us straight away — and we want to be honest about that. When we do get in touch, it's because something genuinely fits.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE BUILD -->
+<section id="build">
+  <div class="container">
+    <p class="section-label">03 — Who This Is For</p>
+    <h2>What we're trying to build</h2>
+    <p class="build-intro">We're building something that works best for people who are ready for their next chapter — not their next stopgap. That changes who we're the right fit for, and we think it's important to be upfront about that.</p>
+
+    <div class="comparison-grid">
+      <div class="comparison-col col-aligned">
+        <div class="comparison-col-title">A good fit if you are</div>
+        <ul>
+          <li>Currently employed and thinking about what's next — not urgently job hunting</li>
+          <li>Looking for one long-term role with a single employer, not multiple clients</li>
+          <li>Ready for a genuine next step in your career, not just a change of scenery</li>
+          <li>Someone who values stability, collaboration, and being part of a team</li>
+          <li>Open to a process that takes time to get right</li>
+        </ul>
+      </div>
+      <div class="comparison-col col-notfit">
+        <div class="comparison-col-title">Probably not the right fit if you are</div>
+        <ul>
+          <li>Looking for a role to start within the next week or two</li>
+          <li>Currently managing multiple clients and prefer to keep it that way</li>
+          <li>Interested in freelance, project-based, or short-term work</li>
+          <li>Applying to many different companies at once without a clear direction</li>
+          <li>Primarily focused on short-term income rather than long-term fit</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="closing-line">There's nothing wrong with different ways of working — this is simply the type of hiring environment we're focused on building.</p>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="container-mid">
+    <p class="section-label">04 — The Process</p>
+    <h2>What the process usually looks like</h2>
+
+    <div class="process-steps">
+      <div class="step">
+        <span class="step-num">01</span>
+        <div class="step-content">
+          <h3>Application or direct outreach</h3>
+          <p>You apply for a specific role — or, if you're already in our pipeline, we may reach out directly when a relevant opportunity comes up. We look at both directions: candidates who come to us, and candidates we already know whose background fits a new role.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">02</span>
+        <div class="step-content">
+          <h3>Initial review</h3>
+          <p>We review your background and overall fit for the role or the types of roles we work on before deciding whether to move forward.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">03</span>
+        <div class="step-content">
+          <h3>Screening and reference checks</h3>
+          <p>We have a proper conversation to understand your experience, working style, long-term goals, and the kind of environment you do your best work in. Reference checks happen alongside this for candidates we're taking forward.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">04</span>
+        <div class="step-content">
+          <h3>Shortlisting and client introductions</h3>
+          <p>If there's strong alignment, we shortlist you and introduce you to the client — giving you proper context on the business and what to expect going into the interview.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">05</span>
+        <div class="step-content">
+          <h3>Offer and onboarding support</h3>
+          <p>We stay involved through the offer stage and early onboarding to help both sides get off to a good start.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="process-note">Not every candidate will move through the process immediately — and that's okay. Sometimes the best-fit opportunities take time to align properly.</p>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="container-mid">
+    <p class="section-label">From Candidates We've Spoken To</p>
+    <h2>In their own words</h2>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"What stood out was how much context I was given before the interview. I actually understood the role and the team before I even spoke to the client."</p>
+        <p class="testimonial-attr">— Placed candidate, operations role</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"I wasn't actively looking, but the opportunity made sense — and the process was straightforward and respectful throughout."</p>
+        <p class="testimonial-attr">— Placed candidate, remote role with a UK business</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"For the first time, I felt like I was being matched — not just sent somewhere and hoped for the best."</p>
+        <p class="testimonial-attr">— Candidate, currently placed</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container-mid">
+    <p class="section-label">05 — Common Questions</p>
+    <h2>Frequently asked questions</h2>
+
+    <div class="faq-list">
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span class="faq-q-text">Who is Hire Anywhere, and what do you actually do?</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>We're a UK-founded recruitment company that connects Filipino professionals with UK businesses looking for long-term remote hires.</p>
+          <p>We work with a smaller number of roles at a time and focus on making proper introductions — ones where both sides have been understood, aligned, and prepared before the first interview. Our team operates in Manila, which means we have real context on both sides of a remote working relationship.</p>
+          <p>We don't charge candidates anything. Our fees are paid by the businesses we work with.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span class="faq-q-text">How are you different from other recruitment agencies or job platforms?</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Our focus is on fit rather than speed. We take time to understand candidates — their experience, working style, and what they're genuinely looking for — before making any introduction. We do the same on the business side, which means by the time both parties meet, there's already a strong foundation.</p>
+          <p>We also work with a focused number of roles at a time, which lets us give each placement the attention it deserves. We'd rather do fewer things well than move fast and get it wrong.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span class="faq-q-text">Can I apply even if I'm not actively job searching?</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes — wherever you are right now is fine. Some people come to us actively looking for a new role. Others are settled in their current job but open to something better if the right opportunity comes along. Both are welcome.</p>
+          <p>What matters more than your current situation is whether you're looking for something long-term and are open to a process that takes the time to get it right.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span class="faq-q-text">What happens if there isn't a suitable role right now?</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>You can still be considered for future roles. Rather than leaving things open-ended, you can put yourself forward and we'll keep your profile in mind as new opportunities come in.</p>
+          <p>If something comes up that genuinely fits — in terms of your experience, your goals, and your working style — we'll be in touch. We won't reach out just to fill a gap.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span class="faq-q-text">Will I just submit my details and never hear back?</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>We understand why that concern exists — it's a common experience with platforms that collect CVs at scale. We try to work differently.</p>
+          <p>We're honest that not everyone will hear back immediately, especially if there isn't a clear fit at that moment. But we do keep a considered group of candidates on file, and when something relevant comes up, we reach out. We'll also share occasional updates in the meantime — things like roles we've placed and context on what UK businesses are looking for — so you're not left in the dark.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span class="faq-q-text">What types of roles do you work on?</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>We work across a range of functions — including operations, marketing, finance, administration, and more. The roles vary, but the common thread is that they're long-term, remote positions where the candidate becomes a genuine part of a UK business or team.</p>
+          <p>Most are full-time, though we occasionally work on strong part-time placements too. If you're unsure whether your background fits, it's always worth putting yourself forward — we'll let you know if there's potential alignment.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span class="faq-q-text">What are the usual setup requirements for remote roles?</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Requirements vary depending on the role, but most positions require:</p>
+          <ul>
+            <li>A reliable computer or laptop</li>
+            <li>A stable internet connection</li>
+            <li>Clear audio for calls and meetings</li>
+            <li>A professional and reasonably quiet working environment</li>
+            <li>A webcam for interviews and regular team calls</li>
+            <li>Availability during UK business hours, or the agreed overlap window</li>
+          </ul>
+          <p style="margin-top: 0.75rem;">Any role-specific requirements will always be discussed clearly before you move forward.</p>
+        </div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<!-- CANDIDATE EXPRESSION OF INTEREST FORM -->
+<section id="candidate-form">
+  <div class="container-narrow">
+    <p class="section-label" style="margin-bottom:1rem">No open roles right now</p>
+    <h2>Tell us a little about yourself.</h2>
+    <p class="candidate-form-intro">We don't advertise roles publicly — we match candidates directly to client briefs. Register your interest below and we'll be in touch when a role that genuinely fits comes up. No spam, no job alerts — just a real conversation when the timing is right.</p>
+
+    <div id="candidateSuccess" role="status" aria-live="polite">
+      <h2>Thank you.</h2>
+      <p>We've noted your interest — we'll be in touch when something relevant comes up.</p>
+    </div>
+
+    <form id="candidateInterestForm" name="candidate-interest" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+      <input type="hidden" name="form-name" value="candidate-interest" />
+      <p style="display:none"><label>Don't fill this out: <input name="bot-field" /></label></p>
+
+      <div class="candidate-field">
+        <label for="candName">Full name <span class="req">*</span></label>
+        <input type="text" id="candName" name="name" autocomplete="name" required>
+      </div>
+
+      <div class="candidate-field">
+        <label for="candEmail">Email <span class="req">*</span></label>
+        <input type="email" id="candEmail" name="email" autocomplete="email" required>
+      </div>
+
+      <div class="candidate-field">
+        <label for="candRole">What kind of role are you looking for? <span class="opt">(optional)</span></label>
+        <input type="text" id="candRole" name="role_interest" placeholder="e.g. Finance, Operations, Marketing">
+      </div>
+
+      <div class="candidate-field">
+        <label for="candLinkedin">LinkedIn URL <span class="req">*</span></label>
+        <input type="url" id="candLinkedin" name="linkedin" placeholder="https://linkedin.com/in/yourname" required>
+      </div>
+
+      <button type="submit" class="btn-primary candidate-submit">Submit</button>
+      <p class="candidate-fineprint">We will never share your details or send you spam.</p>
+    </form>
+  </div>
+</section>
+<script>
+(function(){
+  var form = document.getElementById('candidateInterestForm'), succ = document.getElementById('candidateSuccess');
+  if (form && succ) {
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+      try {
+        await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(new FormData(form)).toString() });
+      } catch (err) {
+        // fall through to success state regardless — Netlify form submission is fire-and-forget from the client's perspective
+      }
+      form.style.display = 'none';
+      succ.style.display = 'block';
+      succ.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+})();
+</script>
+
+<!-- FOOTER (shared template) -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="index.html" class="logo footer-logo"><span class="mark">§</span>Hire Anywhere</a>
+      <p class="footer-copy">© 2026 Hire Anywhere</p>
+    </div>
+    <nav class="footer-nav" aria-label="Pages">
+      <a href="index.html">Home</a>
+      <a href="success-stories.html">Success stories</a>
+      <a href="salary-guide.html">Salary guide</a>
+      <a href="careers.html">Careers</a>
+      <a href="contact.html">Contact us</a>
+      <a href="partners.html">Partner with us</a>
+    </nav>
+    <nav class="footer-legal" aria-label="Legal">
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var t=document.querySelector('.nav-trigger'),d=document.querySelector('.nav-dropdown');
+  if(t&&d){
+    t.addEventListener('click',function(e){e.stopPropagation();d.classList.toggle('is-open');t.setAttribute('aria-expanded',d.classList.contains('is-open'));});t.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();d.classList.toggle('is-open');t.setAttribute('aria-expanded',d.classList.contains('is-open'));}});
+    document.addEventListener('click',function(){if(d)d.classList.remove('is-open');});
+  }
+})();
+</script>
+</body>
+</html>

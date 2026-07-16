@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us — Hire Anywhere</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+  :root {
+    --paper: #F1EBDD;
+    --paper-deep: #E5DCC6;
+    --input: #FBF7EC;
+    --ink: #1A1D1A;
+    --ink-soft: #3A3D38;
+    --ink-mute: #6B6A60;
+    --rule: #C9BFA8;
+    --accent: #B0421C;
+    --accent-deep: #8A3416;
+    --max-w: 1080px;
+    --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "ss01", "cv11";
+  }
+  .wrap {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+  .page-wrap { max-width: 760px; margin: 0 auto; padding: clamp(4rem,8vw,6rem) clamp(1.5rem,3vw,2rem) clamp(4rem,8vw,6rem); }
+  .page-eyebrow { font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-mute); margin-bottom:1.5rem; }
+  .page-wrap h1 {
+    font-family:'Fraunces',serif;
+    font-variation-settings:"opsz" 144,"SOFT" 50;
+    font-weight:400;
+    font-size:clamp(1.7rem,3.2vw,2.4rem);
+    line-height:1.15;
+    letter-spacing:-0.015em;
+    margin-bottom:.75rem;
+  }
+  .dateline { font-size:.85rem; color:var(--ink-mute); margin-bottom:2rem; }
+  .page-wrap h2 {
+    font-family:'Fraunces',serif;
+    font-variation-settings:"opsz" 144,"SOFT" 50;
+    font-weight:400;
+    font-size:clamp(1.7rem,3.2vw,2.4rem);
+    line-height:1.15;
+    letter-spacing:-0.015em;
+    color:var(--ink);
+    margin:2.25rem 0 .6rem;
+  }
+  .page-wrap p { font-size:1rem; line-height:1.8; color:var(--ink-soft); margin-bottom:1rem; }
+  .page-wrap a { color:var(--accent); }
+
+  /* ---------- Nav ---------- */
+  body > nav { border-bottom: 1px solid var(--rule); padding: 1.5rem 0; }
+  nav .wrap { display: flex; justify-content: space-between; align-items: center; gap: 2rem; }
+  .logo {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 144, "SOFT" 30;
+    font-weight: 500;
+    font-size: 1.4rem;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.45rem;
+  }
+  .logo .mark {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 400;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .nav-right { display: flex; align-items: center; gap: clamp(1.25rem, 3vw, 2rem); }
+  .nav-link {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    text-decoration: none;
+    transition: color 0.18s ease;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+  }
+  .nav-link:hover { color: var(--ink); }
+  .nav-dropdown { position: relative; display: inline-flex; align-items: center; }
+  .nav-trigger { cursor: pointer; }
+  .nav-trigger .nav-chev { font-size: 9px; color: var(--ink-mute); transition: transform 0.2s ease, color 0.18s ease; display: inline-block; transform: translateY(-1px); }
+  .nav-trigger:hover .nav-chev, .nav-trigger[aria-expanded="true"] .nav-chev { color: var(--accent); }
+  .nav-trigger[aria-expanded="true"] .nav-chev { transform: translateY(-1px) rotate(180deg); }
+  .nav-trigger[aria-expanded="true"] { color: var(--ink); }
+  .nav-menu {
+    position: absolute; top: calc(100% + 0.95rem); right: 0; min-width: 260px; background: var(--paper);
+    border: 1px solid var(--rule);
+    box-shadow: 4px 4px 0 var(--paper-deep), 4px 4px 0 1px var(--rule);
+    padding: 0.5rem 0; opacity: 0; visibility: hidden; transform: translateY(-4px);
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease; z-index: 50;
+  }
+  .nav-menu::before {
+    content: ""; position: absolute; top: -5px; right: 1.5rem; width: 8px; height: 8px;
+    background: var(--paper); border-top: 1px solid var(--rule); border-left: 1px solid var(--rule); transform: rotate(45deg);
+  }
+  .nav-dropdown.is-open .nav-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+  .nav-menu-item { display: block; padding: 0.85rem 1.25rem; text-decoration: none; color: var(--ink); transition: background 0.15s ease; border-left: 2px solid transparent; }
+  .nav-menu-item:hover { background: var(--paper-deep); border-left-color: var(--accent); }
+  .nav-menu-item.is-active { border-left-color: var(--accent); }
+  .nav-menu-title { display: block; font-family: 'Fraunces', serif; font-variation-settings: "opsz" 144, "SOFT" 50; font-weight: 500; font-size: 1rem; letter-spacing: -0.01em; color: var(--ink); margin-bottom: 0.15rem; }
+  .nav-menu-meta { display: block; font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); }
+  .cta {
+    display: inline-block; background: var(--ink); color: var(--paper); padding: 0.8rem 1.35rem; font-size: 14px;
+    font-weight: 500; text-decoration: none; letter-spacing: 0.01em;
+    transition: background 0.18s ease, border-color 0.18s ease; border: 1px solid var(--ink);
+    font-family: 'Geist', sans-serif; cursor: pointer;
+  }
+  .cta:hover { background: var(--accent); border-color: var(--accent); }
+  .cta.accent { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+  .cta.accent:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
+  @media (max-width: 540px) { .nav-right { gap: 1rem; } .nav-cta-hide { display: none; } .nav-menu { min-width: 230px; } }
+  @media (max-width: 768px) { .nav-right { display: none !important; } .nav-mobile-cta { display: inline-block !important; } }
+  @media (min-width: 769px) { .nav-mobile-cta { display: none !important; } }
+  .nav-mobile-cta { background: #1A1D1A; color: #F1EBDD; font-family: 'Geist', system-ui, sans-serif; font-size: .8rem; font-weight: 500; padding: .5rem 1rem; text-decoration: none; display: none; }
+
+  /* ---------- Footer ---------- */
+  footer.site-footer {
+    background: var(--ink) !important;
+    color: #C9BFA8 !important;
+    padding: clamp(2.5rem,5vw,4rem) clamp(1.5rem,5vw,4rem) !important;
+    border-top: none;
+  }
+  .footer-inner { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 1.75rem 3rem; max-width: 1120px; margin: 0 auto; }
+  .footer-brand { flex: 1 1 200px; }
+  .footer-logo { font-family: 'Fraunces', serif; font-size: 1.1rem; color: #F1EBDD !important; text-decoration: none; display: inline-flex; align-items: baseline; gap: .4rem; }
+  .footer-logo .mark { color: var(--accent); font-style: italic; }
+  .footer-copy { font-family: 'Geist Mono', monospace; font-size: .75rem; letter-spacing: .08em; color: #6B6A60; margin-top: .5rem; }
+  .footer-nav, .footer-legal { display: flex; flex-wrap: wrap; gap: .6rem 1.75rem; align-items: center; }
+  .footer-nav { flex: 2 1 380px; }
+  .footer-legal { flex: 0 1 auto; }
+  .footer-nav a, .footer-legal a { font-family: 'Geist', system-ui, sans-serif; font-size: .85rem; color: #C9BFA8 !important; text-decoration: none; transition: color .2s; }
+  .footer-nav a:hover, .footer-legal a:hover { color: var(--accent) !important; }
+  @media (max-width: 640px) { .footer-inner { flex-direction: column; gap: 1.25rem; } }
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a href="index.html" class="logo"><span class="mark">§</span>Hire Anywhere</a>
+    <div class="nav-right">
+      <a href="success-stories.html" class="nav-link">Success stories</a>
+      <div class="nav-dropdown">
+        <span class="nav-link nav-trigger" role="button" tabindex="0" aria-expanded="false" aria-haspopup="true" aria-controls="guides-menu">
+          Guides <span class="nav-chev" aria-hidden="true">▾</span>
+        </span>
+        <div class="nav-menu" id="guides-menu" role="menu">
+          <a href="salary-guide.html" class="nav-menu-item" role="menuitem">
+            <span class="nav-menu-title">Salary Guide</span>
+            <span class="nav-menu-meta">UK vs Overseas · 12 roles</span>
+          </a>
+        </div>
+      </div>
+      <a href="start-hiring.html" class="cta nav-cta-hide">Start hiring</a>
+    </div>
+  </div>
+</nav>
+<div class="page-wrap">
+  <h1>Get in touch.</h1>
+  <p style="color:var(--ink-mute);margin-bottom:2.5rem">We're here for hiring enquiries, partnership questions, or anything else. We'll get back to you within one working day.</p>
+  <form id="contactForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+    <input type="hidden" name="form-name" value="contact" />
+    <p style="display:none"><input name="bot-field" /></p>
+    <div class="field-row" style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem">
+      <div class="field">
+        <label style="font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mute);display:block;margin-bottom:.5rem" for="name">Your name *</label>
+        <input type="text" id="name" name="name" required style="width:100%;border:1px solid var(--rule);background:var(--paper);padding:.75rem;font-family:'Geist',system-ui,sans-serif;font-size:.9rem;outline:none;border-radius:0" />
+      </div>
+      <div class="field">
+        <label style="font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mute);display:block;margin-bottom:.5rem" for="email">Email *</label>
+        <input type="email" id="email" name="email" required style="width:100%;border:1px solid var(--rule);background:var(--paper);padding:.75rem;font-family:'Geist',system-ui,sans-serif;font-size:.9rem;outline:none;border-radius:0" />
+      </div>
+    </div>
+    <div class="field" style="margin-bottom:1.25rem">
+      <label style="font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mute);display:block;margin-bottom:.5rem" for="phone">Phone <span style="font-weight:300;text-transform:none;letter-spacing:0">(optional)</span></label>
+      <input type="tel" id="phone" name="phone" style="width:100%;border:1px solid var(--rule);background:var(--paper);padding:.75rem;font-family:'Geist',system-ui,sans-serif;font-size:.9rem;outline:none;border-radius:0" />
+    </div>
+    <div class="field" style="margin-bottom:1.75rem">
+      <label style="font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mute);display:block;margin-bottom:.5rem" for="message">Your enquiry *</label>
+      <textarea id="message" name="message" rows="6" required placeholder="Tell us what you need..." style="width:100%;border:1px solid var(--rule);background:var(--paper);padding:.75rem;font-family:'Geist',system-ui,sans-serif;font-size:.9rem;outline:none;border-radius:0;resize:vertical"></textarea>
+    </div>
+    <button type="submit" class="cta" style="width:100%;padding:1rem;font-size:1rem">Send message</button>
+  </form>
+  <div id="contactSuccess" style="display:none;padding:2.5rem;text-align:center;border:1px solid var(--rule)">
+    <p style="font-family:'Fraunces',serif;font-size:1.4rem;margin-bottom:.5rem">Got it.</p>
+    <p style="color:var(--ink-mute)">We'll be in touch within one working day.</p>
+  </div>
+</div>
+<script>
+(function(){
+  var form=document.getElementById('contactForm'),succ=document.getElementById('contactSuccess');
+  if(form&&succ){
+    form.addEventListener('submit',async function(e){
+      e.preventDefault();
+      try{
+        await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(form)).toString()});
+        form.style.display='none';succ.style.display='block';
+      }catch(err){form.style.display='none';succ.style.display='block';}
+    });
+  }
+})();
+</script>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="index.html" class="logo footer-logo"><span class="mark">§</span>Hire Anywhere</a>
+      <p class="footer-copy">© 2026 Hire Anywhere</p>
+    </div>
+    <nav class="footer-nav" aria-label="Pages">
+      <a href="index.html">Home</a>
+      <a href="success-stories.html">Success stories</a>
+      <a href="salary-guide.html">Salary guide</a>
+      <a href="careers.html">Careers</a>
+      <a href="contact.html">Contact us</a>
+      <a href="partners.html">Partner with us</a>
+    </nav>
+    <nav class="footer-legal" aria-label="Legal">
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+    </nav>
+  </div>
+</footer>
+<script>
+(function(){
+  var t=document.querySelector('.nav-trigger'),d=document.querySelector('.nav-dropdown');
+  if(t&&d){
+    t.addEventListener('click',function(e){e.stopPropagation();d.classList.toggle('is-open');t.setAttribute('aria-expanded',d.classList.contains('is-open'));});
+    t.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();d.classList.toggle('is-open');t.setAttribute('aria-expanded',d.classList.contains('is-open'));}});
+    document.addEventListener('click',function(){if(d)d.classList.remove('is-open');});
+  }
+})();
+</script>
+</body>
+</html>

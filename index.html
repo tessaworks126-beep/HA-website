@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hire Anywhere — Hire the person you need, for a third of the cost</title>
+<meta name="description" content="Hire Anywhere headhunts brilliant overseas talent for UK businesses — fully vetted, UK-hours, a third of the cost." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300;9..144,400;9..144,500;9..144,600&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F1EBDD;
+    --paper-deep: #E5DCC6;
+    --paper-deeper: #D9CFB6;
+    --ink: #1A1D1A;
+    --ink-soft: #3A3D38;
+    --ink-mute: #6B6A60;
+    --rule: #C9BFA8;
+    --rule-strong: #A89E85;
+    --accent: #B0421C;
+    --accent-deep: #8A3416;
+    --max-w: 1080px;
+    --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "ss01", "cv11";
+  }
+  .wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--gutter); }
+
+  /* ---------- Nav ---------- */
+  body > nav { border-bottom: 1px solid var(--rule); padding: 1.5rem 0; }
+  nav .wrap { display: flex; justify-content: space-between; align-items: center; gap: 2rem; }
+  .logo {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 144, "SOFT" 30;
+    font-weight: 500;
+    font-size: 1.4rem;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.45rem;
+  }
+  .logo .mark { font-style: italic; color: var(--accent); font-weight: 400; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; }
+  .nav-right { display: flex; align-items: center; gap: clamp(1.25rem, 3vw, 2rem); }
+  .nav-link {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    text-decoration: none;
+    transition: color 0.18s ease;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+  }
+  .nav-link:hover { color: var(--ink); }
+  .nav-dropdown { position: relative; display: inline-flex; align-items: center; }
+  .nav-trigger { cursor: pointer; }
+  .nav-trigger .nav-chev { font-size: 9px; color: var(--ink-mute); transition: transform 0.2s ease, color 0.18s ease; display: inline-block; transform: translateY(-1px); }
+  .nav-trigger:hover .nav-chev, .nav-trigger[aria-expanded="true"] .nav-chev { color: var(--accent); }
+  .nav-trigger[aria-expanded="true"] .nav-chev { transform: translateY(-1px) rotate(180deg); }
+  .nav-trigger[aria-expanded="true"] { color: var(--ink); }
+  .nav-menu {
+    position: absolute; top: calc(100% + 0.95rem); right: 0; min-width: 260px; background: var(--paper);
+    border: 1px solid var(--rule); box-shadow: 4px 4px 0 var(--paper-deep), 4px 4px 0 1px var(--rule);
+    padding: 0.5rem 0; opacity: 0; visibility: hidden; transform: translateY(-4px);
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease; z-index: 50;
+  }
+  .nav-menu::before {
+    content: ""; position: absolute; top: -5px; right: 1.5rem; width: 8px; height: 8px;
+    background: var(--paper); border-top: 1px solid var(--rule); border-left: 1px solid var(--rule); transform: rotate(45deg);
+  }
+  .nav-dropdown.is-open .nav-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+  .nav-menu-item { display: block; padding: 0.85rem 1.25rem; text-decoration: none; color: var(--ink); transition: background 0.15s ease; border-left: 2px solid transparent; }
+  .nav-menu-item:hover { background: var(--paper-deep); border-left-color: var(--accent); }
+  .nav-menu-title { display: block; font-family: 'Fraunces', serif; font-variation-settings: "opsz" 144, "SOFT" 50; font-weight: 500; font-size: 1rem; letter-spacing: -0.01em; color: var(--ink); margin-bottom: 0.15rem; }
+  .nav-menu-meta { display: block; font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); }
+  .cta {
+    display: inline-block; background: var(--ink); color: var(--paper); padding: 0.8rem 1.35rem; font-size: 14px; font-weight: 500;
+    text-decoration: none; letter-spacing: 0.01em; transition: background 0.18s ease, border-color 0.18s ease;
+    border: 1px solid var(--ink); font-family: 'Geist', sans-serif; cursor: pointer;
+  }
+  .cta:hover { background: var(--accent); border-color: var(--accent); }
+  .cta.outline { background: transparent; color: var(--ink); border-color: var(--ink); }
+  .cta.outline:hover { background: var(--ink); color: var(--paper); }
+  .cta.accent { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+  .cta.accent:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
+  @media (max-width: 540px) { .nav-right { gap: 1rem; } .nav-cta-hide { display: none; } .nav-menu { min-width: 230px; } }
+  @media (max-width: 768px) { .nav-right { display: none !important; } }
+
+  /* ---------- Hero (revised, centred) ---------- */
+  .hero-r { padding: clamp(3.5rem, 8vw, 6rem) 0 clamp(3rem, 6vw, 5rem); border-bottom: 1px solid var(--rule); position: relative; }
+  .hero-r .wrap { display: grid; grid-template-columns: repeat(12, 1fr); gap: clamp(1.5rem, 4vw, 3rem); align-items: end; max-width: 1180px; }
+  @media (max-width: 880px) { .hero-r .wrap { grid-template-columns: 1fr; gap: 2.5rem; } }
+  .hero-main { grid-column: 1 / span 7; }
+  @media (max-width: 880px) { .hero-main { grid-column: 1 / -1; } }
+  .hero-eyebrow { margin-bottom: 2rem; }
+  .eyebrow {
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 1.75rem;
+    display: flex; align-items: center; gap: 0.75rem; font-family: 'Geist Mono', monospace;
+  }
+  .eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--ink-mute); }
+  h1 {
+    font-family: 'Fraunces', serif; font-variation-settings: "opsz" 144, "SOFT" 50; font-weight: 400;
+    font-size: clamp(2.4rem, 5.6vw, 4.2rem); line-height: 1.02; letter-spacing: -0.022em; max-width: 16ch; margin-bottom: 1.75rem;
+  }
+  h1 em { font-style: italic; font-variation-settings: "opsz" 144, "SOFT" 50; color: var(--accent); }
+  h2 {
+    font-family: 'Fraunces', serif; font-variation-settings: "opsz" 144, "SOFT" 50; font-weight: 400;
+    font-size: clamp(1.7rem, 3.2vw, 2.4rem); line-height: 1.15; letter-spacing: -0.015em; margin-bottom: 1.5rem; max-width: 22ch;
+  }
+  h2 em { font-style: italic; font-variation-settings: "opsz" 144, "SOFT" 50; color: var(--accent); }
+  .hero-lead { font-size: clamp(1.05rem, 1.5vw, 1.18rem); color: var(--ink-soft); max-width: 52ch; margin-bottom: 2.25rem; line-height: 1.55; }
+  .hero-actions { display: flex; gap: 0.85rem; flex-wrap: wrap; align-items: flex-start; margin-bottom: 0.9rem; }
+  .hero-cta-primary { display: flex; flex-direction: column; align-items: center; }
+  .hero-reassure {
+    font-family: 'Fraunces', serif; font-variation-settings: "opsz" 36, "SOFT" 30; font-style: italic; font-weight: 400;
+    font-size: 0.95rem; color: var(--ink-mute); letter-spacing: -0.005em; margin-top: 0.6rem; text-align: center;
+  }
+  .hero-centred .wrap { grid-template-columns: 1fr; text-align: center; justify-items: center; max-width: 900px; }
+  .hero-centred .hero-main { grid-column: 1; display: flex; flex-direction: column; align-items: center; }
+  .hero-centred .hero-eyebrow { justify-content: center; }
+  .hero-centred .hero-eyebrow::after { content: ""; width: 28px; height: 1px; background: var(--ink-mute); }
+  .hero-centred h1 { text-align: center; margin-left: auto; margin-right: auto; max-width: 18ch; }
+  .hero-centred .hero-lead { text-align: center; margin-left: auto; margin-right: auto; }
+  .hero-centred .hero-actions { justify-content: center; }
+  .hero-centred .hero-reassure { text-align: center; }
+
+  /* ---------- Social proof (revised) ---------- */
+  .proof-r { padding: clamp(4rem, 8vw, 6rem) 0; border-bottom: 1px solid var(--rule); background: var(--paper-deep); }
+  .proof-r .wrap { display: grid; grid-template-columns: 1fr 7fr 1fr; gap: 2rem; max-width: 1180px; }
+  @media (max-width: 880px) { .proof-r .wrap { grid-template-columns: 1fr; } }
+  .proof-pullquote { grid-column: 2; text-align: center; position: relative; padding: 0 clamp(0.5rem, 3vw, 2rem); }
+  @media (max-width: 880px) { .proof-pullquote { grid-column: 1; text-align: left; } }
+  .proof-mark { font-family: 'Fraunces', serif; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; font-style: italic; font-weight: 400; color: var(--accent); font-size: 5rem; line-height: 1; display: block; margin-bottom: -1rem; }
+  .proof-body {
+    font-family: 'Fraunces', serif; font-variation-settings: "opsz" 144, "SOFT" 50; font-weight: 400; font-style: italic;
+    font-size: clamp(1.75rem, 3.6vw, 2.6rem); line-height: 1.2; letter-spacing: -0.015em; color: var(--ink); max-width: 22ch; margin: 0 auto 2.25rem;
+  }
+  @media (max-width: 880px) { .proof-body { margin-left: 0; } }
+  .proof-body em { font-variation-settings: "opsz" 144, "SOFT" 50; color: var(--accent); font-style: italic; }
+  .proof-attrib {
+    font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-mute);
+    display: inline-flex; align-items: center; gap: 0.75rem;
+  }
+  .proof-attrib::before, .proof-attrib::after { content: ""; width: 32px; height: 1px; background: var(--rule-strong); }
+  @media (max-width: 880px) { .proof-attrib::before { display: none; } }
+  .ticker { margin-top: clamp(3rem, 6vw, 4.5rem); grid-column: 1 / -1; display: grid; grid-template-columns: auto 1px 1fr; align-items: stretch; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+  .ticker-label { font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-mute); padding: 1.1rem clamp(1rem, 2.5vw, 1.5rem) 1.1rem 0; white-space: nowrap; align-self: center; line-height: 1.4; }
+  @media (max-width: 520px) {
+    .ticker { grid-template-columns: 1fr; grid-template-rows: auto auto; }
+    .ticker-label { font-size: 9px; padding: 0.85rem 0 0.5rem; border-bottom: 1px solid var(--rule-strong); text-align: left; }
+    .ticker-divider { display: none; }
+    .ticker-track { padding: 0.85rem 0; }
+    .ticker-rail { padding-left: 0; }
+  }
+  .ticker-divider { background: var(--rule-strong); width: 1px; }
+  .ticker-track { overflow: hidden; position: relative; padding: 1.1rem 0; align-self: center; }
+  .ticker-rail { display: inline-flex; align-items: baseline; gap: clamp(1.75rem, 4vw, 3rem); white-space: nowrap; animation: ticker-scroll 70s linear infinite; will-change: transform; padding-left: clamp(1rem, 2.5vw, 1.5rem); }
+  .ticker:hover .ticker-rail { animation-play-state: paused; }
+  @keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .ticker-rail { animation: none; } .ticker-track { overflow-x: auto; } }
+  .ticker-item { display: inline-flex; align-items: baseline; gap: 0.85rem; }
+  .ticker-quote { font-family: 'Fraunces', serif; font-variation-settings: "opsz" 36, "SOFT" 30; font-style: italic; font-weight: 400; font-size: clamp(1rem, 1.5vw, 1.15rem); color: var(--ink); letter-spacing: -0.005em; line-height: 1.3; }
+  .ticker-quote::before { content: "\201C"; color: var(--accent); margin-right: 0.05em; }
+  .ticker-quote::after { content: "\201D"; color: var(--accent); }
+  .ticker-attrib { font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); font-weight: 500; }
+  .ticker-sep { font-family: 'Fraunces', serif; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; font-style: italic; font-size: 1.2rem; color: var(--accent); line-height: 1; opacity: 0.8; }
+
+  /* ---------- Three-beat container ---------- */
+  .three-beat { background: var(--paper); }
+  .three-beat > section { border-bottom: none; }
+  .three-beat > section:first-child { padding-top: clamp(4.5rem, 9vw, 6.5rem); }
+  .three-beat > section:last-child { padding-bottom: clamp(4.5rem, 9vw, 6.5rem); }
+  .three-beat > section { padding-top: clamp(2.5rem, 6vw, 4rem); padding-bottom: clamp(2.5rem, 6vw, 4rem); }
+  section { padding: clamp(3.5rem, 8vw, 5.5rem) 0; border-bottom: 1px solid var(--rule); }
+  .two-col { display: grid; grid-template-columns: 1fr 1.4fr; gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+  @media (max-width: 720px) { .two-col { grid-template-columns: 1fr; } }
+  .value-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+  .value-list li { font-size: 1.05rem; color: var(--ink-soft); line-height: 1.55; padding: 1rem 0; border-bottom: 1px solid var(--rule); display: flex; gap: 1rem; align-items: baseline; max-width: 62ch; }
+  .value-list li::before { content: "\2014"; color: var(--accent); font-family: 'Fraunces', serif; font-style: italic; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; flex-shrink: 0; }
+
+  /* Pivot section */
+  .pivot { padding: clamp(5rem, 11vw, 8rem) 0; text-align: center; }
+  .pivot .wrap { display: flex; flex-direction: column; align-items: center; gap: clamp(1.5rem, 3vw, 2rem); }
+  .pivot-eyebrow { margin-bottom: 0; justify-content: center; }
+  .pivot-eyebrow::after { content: ""; width: 28px; height: 1px; background: var(--ink-mute); }
+  .pivot-h2 {
+    font-family: 'Fraunces', serif; font-variation-settings: "opsz" 144, "SOFT" 50; font-weight: 400;
+    font-size: clamp(2rem, 4.2vw, 3rem); line-height: 1.1; letter-spacing: -0.022em; color: var(--ink); max-width: 22ch; margin: 0 auto; text-align: center;
+  }
+  .pivot-h2 em { font-style: italic; font-variation-settings: "opsz" 144, "SOFT" 50; color: var(--accent); }
+
+  /* ---------- How it works ---------- */
+  #how { background: var(--paper-deep); }
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(1.25rem, 3vw, 2.25rem); margin-top: 1rem; }
+  @media (max-width: 900px) { .steps { grid-template-columns: repeat(2, 1fr); gap: 2rem; } }
+  @media (max-width: 520px) { .steps { grid-template-columns: 1fr; gap: 2rem; } }
+  .step { border-top: 1px solid var(--ink); padding-top: 1.1rem; }
+  .step-num { font-family: 'Geist Mono', monospace; font-size: 0.8rem; color: var(--accent); margin-bottom: 0.6rem; letter-spacing: 0.06em; }
+  .step h3 { font-family: 'Fraunces', serif; font-variation-settings: "opsz" 144, "SOFT" 50; font-weight: 400; font-size: 1.25rem; line-height: 1.2; letter-spacing: -0.01em; margin-bottom: 0.65rem; }
+  .step p { font-size: 0.95rem; color: var(--ink-soft); line-height: 1.55; }
+
+  /* ---------- What's possible (revised) ---------- */
+  .possible-r { padding: clamp(4rem, 8vw, 6rem) 0; background: var(--paper); border-bottom: 1px solid var(--rule); }
+  .possible-r .wrap { max-width: 1180px; }
+  .possible-r .section-head { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: end; margin-bottom: clamp(2.5rem, 5vw, 3.5rem); }
+  @media (max-width: 720px) { .possible-r .section-head { grid-template-columns: 1fr; gap: 1rem; } }
+  .possible-r h2 { font-size: clamp(1.8rem, 3.4vw, 2.5rem); max-width: 18ch; margin-bottom: 0; }
+  .possible-r .head-eyebrow { margin-bottom: 1.25rem; }
+  .possible-foot-note { font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute); justify-self: end; text-align: right; line-height: 1.5; max-width: 28ch; }
+  @media (max-width: 720px) { .possible-foot-note { justify-self: start; text-align: left; } }
+  .tier-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1.5px solid var(--ink); border-bottom: 1.5px solid var(--ink); }
+  @media (max-width: 880px) { .tier-grid { grid-template-columns: 1fr; } }
+  .tier {
+    padding: clamp(1.75rem, 3vw, 2.5rem) clamp(1.5rem, 2.5vw, 2rem); display: flex; flex-direction: column; gap: clamp(1.5rem, 3vw, 2rem);
+    border-right: 1px solid var(--rule-strong); position: relative; background: var(--paper);
+  }
+  .tier:last-child { border-right: none; }
+  @media (max-width: 880px) { .tier { border-right: none; border-bottom: 1px solid var(--rule-strong); padding: 2rem 0; } .tier:last-child { border-bottom: none; } }
+  .tier-head { display: flex; flex-direction: column; gap: 0.6rem; }
+  .tier-eyebrow { font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 500; }
+  .tier-title { font-family: 'Fraunces', serif; font-variation-settings: "opsz" 144, "SOFT" 50; font-weight: 400; font-size: clamp(1.5rem, 2.4vw, 1.85rem); line-height: 1.05; letter-spacing: -0.018em; color: var(--ink); }
+  .tier-rows { display: flex; flex-direction: column; gap: 1rem; }
+  .tier-row { display: flex; flex-direction: column; gap: 0.35rem; padding-bottom: 1rem; border-bottom: 1px solid var(--rule); }
+  .tier-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .tier-label { font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-mute); font-weight: 500; display: flex; align-items: baseline; gap: 0.5rem; }
+  .tier-label span { font-size: 9px; opacity: 0.7; letter-spacing: 0.12em; font-weight: 400; }
+  .tier-figure { font-family: 'Fraunces', serif; font-variation-settings: "opsz" 144, "SOFT" 30; font-weight: 400; font-size: clamp(1.15rem, 1.8vw, 1.35rem); color: var(--ink-soft); letter-spacing: -0.008em; font-feature-settings: "tnum"; }
+  .tier-figure--ph { color: var(--ink); }
+
+  /* --- Savings block: blends with the cream section background, orange top divider separates it from the salary row above --- */
+  .tier-foot {
+    margin-top: auto;
+    padding-top: clamp(1.25rem, 2.5vw, 1.75rem);
+    border-top: 2px solid var(--accent);
+    background: transparent;
+    display: flex; flex-direction: column; gap: 0.35rem;
+  }
+  .tier-foot-label { font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-mute); font-weight: 500; }
+  .tier-foot-fig {
+    font-family: 'Fraunces', serif; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; font-style: italic; font-weight: 500;
+    font-size: clamp(3.2rem, 6vw, 4.4rem); line-height: 0.95; letter-spacing: -0.035em; color: var(--accent);
+    font-feature-settings: "tnum"; display: flex; align-items: baseline;
+  }
+  .tier-foot-fig .pct { font-size: 0.55em; margin-left: 0.05em; letter-spacing: -0.02em; }
+  .tier-foot-cap { font-family: 'Fraunces', serif; font-variation-settings: "opsz" 14, "SOFT" 30; font-weight: 400; font-size: 0.95rem; color: var(--ink-soft); line-height: 1.4; letter-spacing: -0.005em; }
+  .tier-foot-cap strong { font-weight: 500; color: var(--ink); font-style: italic; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; }
+
+  .tier-also { margin-top: clamp(2rem, 4vw, 2.75rem); padding-top: clamp(1.5rem, 3vw, 2rem); border-top: 1px dashed var(--rule-strong); display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; align-items: baseline; }
+  .tier-also-lead { font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-mute); white-space: nowrap; }
+  .tier-also-roles { font-family: 'Fraunces', serif; font-variation-settings: "opsz" 144, "SOFT" 30; font-weight: 400; font-size: clamp(1rem, 1.5vw, 1.15rem); line-height: 1.6; color: var(--ink-soft); letter-spacing: -0.005em; flex: 1; min-width: 240px; }
+  .tier-also-roles em { font-style: italic; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; color: var(--accent); margin: 0 0.35em; opacity: 0.85; }
+
+  /* ---------- Salary guide ---------- */
+  #salary-guide { background: var(--paper-deep); }
+  .salary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+  @media (max-width: 820px) { .salary-grid { grid-template-columns: 1fr; } }
+  .salary-copy h2 { margin-bottom: 1.25rem; }
+  .salary-copy p { font-size: 1.05rem; color: var(--ink-soft); max-width: 42ch; margin-bottom: 1.75rem; line-height: 1.55; }
+  .salary-form { display: flex; flex-direction: column; gap: 0.75rem; max-width: 380px; }
+  .salary-form input { background: var(--paper); border: 1px solid var(--rule); padding: 0.85rem 1rem; font-family: 'Geist', sans-serif; font-size: 15px; color: var(--ink); transition: border-color 0.18s ease; }
+  .salary-form input::placeholder { color: var(--ink-mute); }
+  .salary-form input:focus { outline: none; border-color: var(--accent); }
+  .salary-form .cta { margin-top: 0.25rem; text-align: center; }
+  .salary-form .fineprint { font-family: 'Geist Mono', monospace; font-size: 11px; color: var(--ink-mute); letter-spacing: 0.04em; margin-top: 0.25rem; }
+  .guide-mock { background: var(--paper); border: 1px solid var(--rule); padding: clamp(1.5rem, 4vw, 2.5rem); box-shadow: 4px 4px 0 var(--paper-deep), 4px 4px 0 1px var(--rule); position: relative; }
+  .guide-mock .logo-row { display: flex; align-items: baseline; gap: 0.45rem; margin-bottom: 0.25rem; }
+  .guide-mock .logo-row .mark { font-family: 'Fraunces', serif; color: var(--accent); font-style: italic; font-size: 1.15rem; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; }
+  .guide-mock .logo-row .name { font-family: 'Fraunces', serif; font-weight: 500; font-size: 1.05rem; letter-spacing: -0.01em; }
+  .guide-mock .edition { font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 1.5rem; }
+  .guide-mock .title { font-family: 'Fraunces', serif; font-variation-settings: "opsz" 144, "SOFT" 50; font-weight: 400; font-size: clamp(1.5rem, 2.6vw, 1.85rem); line-height: 1.1; letter-spacing: -0.015em; margin-bottom: 1.5rem; }
+  .guide-mock .inside-label { font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 0.85rem; }
+  .guide-mock ul { list-style: none; margin-bottom: 1.5rem; }
+  .guide-mock ul li { font-family: 'Fraunces', serif; font-size: 1.05rem; line-height: 1.7; color: var(--ink); display: flex; gap: 0.5rem; }
+  .guide-mock ul li::before { content: "\2014"; color: var(--ink); }
+  .guide-mock ul li.more { font-style: italic; color: var(--ink-mute); font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; }
+  .guide-mock .footer-strip { font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute); padding-top: 1.25rem; border-top: 1px solid var(--rule); }
+
+  /* ---------- Next step (dark hero) ---------- */
+  .next-step { background: #15171A; color: var(--paper); padding: clamp(4.5rem, 10vw, 7rem) 0; border-bottom: none; }
+  .next-centred .wrap { display: flex; flex-direction: column; align-items: center; text-align: center; max-width: 900px; }
+  .next-eyebrow { color: rgba(241, 235, 221, 0.55); justify-content: center; margin-bottom: 2rem; }
+  .next-eyebrow::before { background: rgba(241, 235, 221, 0.35); }
+  .next-eyebrow::after { content: ""; width: 28px; height: 1px; background: rgba(241, 235, 221, 0.35); }
+  .next-h2 { font-family: 'Fraunces', serif; font-variation-settings: "opsz" 144, "SOFT" 50; font-weight: 400; font-size: clamp(2rem, 4.5vw, 3.4rem); line-height: 1.05; letter-spacing: -0.02em; color: var(--paper); max-width: 22ch; margin-bottom: 1.5rem; }
+  .next-h2 em { font-style: italic; font-variation-settings: "opsz" 144, "SOFT" 50; color: var(--accent); }
+  .cta-block {
+    display: inline-flex; align-items: center; gap: 0.75rem; background: var(--accent); color: var(--paper); padding: 1rem 1.75rem;
+    font-family: 'Geist', sans-serif; font-size: 16px; font-weight: 500; text-decoration: none; letter-spacing: 0.005em;
+    border: 1px solid var(--accent); transition: background 0.18s ease, border-color 0.18s ease, gap 0.2s ease;
+  }
+  .cta-block .arrow { display: inline-block; transition: transform 0.2s ease; }
+  .cta-block:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
+  .cta-block:hover .arrow { transform: translateX(4px); }
+  .next-reassure { font-family: 'Fraunces', serif; font-variation-settings: "opsz" 36, "SOFT" 30; font-style: italic; font-weight: 400; font-size: 0.95rem; letter-spacing: -0.005em; color: rgba(241, 235, 221, 0.65); margin-top: 1.5rem; text-align: center; }
+  .next-reassure em { font-style: italic; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; color: var(--accent); font-weight: 500; }
+
+  /* ---------- Footer ---------- */
+  footer.site-footer { background: var(--ink) !important; color: #C9BFA8 !important; padding: clamp(2.5rem,5vw,4rem) clamp(1.5rem,5vw,4rem) !important; border-top: none; }
+  .footer-inner { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 1.75rem 3rem; max-width: 1120px; margin: 0 auto; }
+  .footer-brand { flex: 1 1 200px; }
+  .footer-logo { font-family: 'Fraunces', serif; font-size: 1.1rem; color: #F1EBDD !important; text-decoration: none; display: inline-flex; align-items: baseline; gap: .4rem; }
+  .footer-logo .mark { color: var(--accent); font-style: italic; }
+  .footer-copy { font-family: 'Geist Mono', monospace; font-size: .75rem; letter-spacing: .08em; color: #6B6A60; margin-top: .5rem; }
+  .footer-nav, .footer-legal { display: flex; flex-wrap: wrap; gap: .6rem 1.75rem; align-items: center; }
+  .footer-nav { flex: 2 1 380px; }
+  .footer-nav a, .footer-legal a { font-family: 'Geist', system-ui, sans-serif; font-size: .85rem; color: #C9BFA8 !important; text-decoration: none; transition: color .2s; }
+  .footer-nav a:hover, .footer-legal a:hover { color: var(--accent) !important; }
+  @media (max-width: 640px) { .footer-inner { flex-direction: column; gap: 1.25rem; } }
+</style>
+</head>
+<body>
+<!-- Nav -->
+<nav>
+  <div class="wrap">
+    <a href="index.html" class="logo"><span class="mark">§</span>Hire Anywhere</a>
+    <div class="nav-right">
+      <a href="success-stories.html" class="nav-link">Success stories</a>
+      <div class="nav-dropdown">
+        <span class="nav-link nav-trigger" role="button" tabindex="0" aria-expanded="false" aria-haspopup="true" aria-controls="guides-menu">
+          Guides <span class="nav-chev" aria-hidden="true">▾</span>
+        </span>
+        <div class="nav-menu" id="guides-menu" role="menu">
+          <a href="salary-guide.html" class="nav-menu-item" role="menuitem">
+            <span class="nav-menu-title">Salary Guide</span>
+            <span class="nav-menu-meta">UK vs Overseas · 12 roles</span>
+          </a>
+        </div>
+      </div>
+      <a href="start-hiring.html" class="cta nav-cta-hide">Start hiring</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero (revised, centred) -->
+<section class="hero-r hero-centred">
+  <div class="wrap">
+    <div class="hero-main">
+      <div class="eyebrow hero-eyebrow">Headhunter for overseas talent</div>
+      <h1>Hire the person you need. <em>For a third of the cost.</em></h1>
+      <p class="hero-lead">We headhunt brilliant overseas talent for your business — fully vetted, UK working hours, a third of the cost. If they don't click in six months, we replace them, free.</p>
+      <div class="hero-actions">
+        <div class="hero-cta-primary">
+          <a href="start-hiring.html" class="cta">Start hiring</a>
+          <p class="hero-reassure">Only pay when you hire.</p>
+        </div>
+        <a href="#how" class="cta outline">How it works</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Social proof (revised) -->
+<section class="proof-r">
+  <div class="wrap">
+    <div class="proof-pullquote">
+      <span class="proof-mark" aria-hidden="true">"</span>
+      <blockquote class="proof-body">Hire Anywhere feels like <em>a cheat code</em> for my business. I wish I had done this sooner.</blockquote>
+      <div class="proof-attrib">Ross · Founder · Marketing Agency</div>
+    </div>
+    <div class="ticker" aria-label="Client quotes">
+      <div class="ticker-label">In their words —</div>
+      <div class="ticker-divider" aria-hidden="true"></div>
+      <div class="ticker-track">
+        <div class="ticker-rail">
+          <span class="ticker-item"><span class="ticker-quote">A cheat code for my business</span><span class="ticker-attrib">Ross · Marketing Agency</span></span>
+          <span class="ticker-sep" aria-hidden="true">❦</span>
+          <span class="ticker-item"><span class="ticker-quote">If I had the budget, I'd have hired all three candidates</span><span class="ticker-attrib">Andrew · Digital Publisher</span></span>
+          <span class="ticker-sep" aria-hidden="true">❦</span>
+          <span class="ticker-item"><span class="ticker-quote">I wish I had done this sooner</span><span class="ticker-attrib">Ross · Marketing Agency</span></span>
+          <span class="ticker-sep" aria-hidden="true">❦</span>
+          <span class="ticker-item"><span class="ticker-quote">I'm so pleased with my new operations assistant</span><span class="ticker-attrib">Amy · E-commerce</span></span>
+          <span class="ticker-sep" aria-hidden="true">❦</span>
+          <span class="ticker-item"><span class="ticker-quote">3 top candidates — they were all excellent</span><span class="ticker-attrib">Rob · Health Brand</span></span>
+          <span class="ticker-sep" aria-hidden="true">❦</span>
+          <span class="ticker-item"><span class="ticker-quote">My new hire has fitted into the team seamlessly</span><span class="ticker-attrib">Louise · Snack Brand</span></span>
+          <span class="ticker-sep" aria-hidden="true">❦</span>
+          <span class="ticker-item"><span class="ticker-quote">The whole process was seamless</span><span class="ticker-attrib">Will · E-commerce</span></span>
+          <span class="ticker-sep" aria-hidden="true">❦</span>
+          <span class="ticker-item"><span class="ticker-quote">I'm blown away by the quality of the candidates</span><span class="ticker-attrib">Charlotte · Growth Consultancy</span></span>
+          <span class="ticker-sep" aria-hidden="true">❦</span>
+          <span class="ticker-item" aria-hidden="true"><span class="ticker-quote">A cheat code for my business</span><span class="ticker-attrib">Ross · Marketing Agency</span></span>
+          <span class="ticker-sep" aria-hidden="true">❦</span>
+          <span class="ticker-item" aria-hidden="true"><span class="ticker-quote">If I had the budget, I'd have hired all three candidates</span><span class="ticker-attrib">Andrew · Digital Publisher</span></span>
+          <span class="ticker-sep" aria-hidden="true">❦</span>
+          <span class="ticker-item" aria-hidden="true"><span class="ticker-quote">I wish I had done this sooner</span><span class="ticker-attrib">Ross · Marketing Agency</span></span>
+          <span class="ticker-sep" aria-hidden="true">❦</span>
+          <span class="ticker-item" aria-hidden="true"><span class="ticker-quote">I'm so pleased with my new operations assistant</span><span class="ticker-attrib">Amy · E-commerce</span></span>
+          <span class="ticker-sep" aria-hidden="true">❦</span>
+          <span class="ticker-item" aria-hidden="true"><span class="ticker-quote">3 top candidates — they were all excellent</span><span class="ticker-attrib">Rob · Health Brand</span></span>
+          <span class="ticker-sep" aria-hidden="true">❦</span>
+          <span class="ticker-item" aria-hidden="true"><span class="ticker-quote">My new hire has fitted into the team seamlessly</span><span class="ticker-attrib">Louise · Snack Brand</span></span>
+          <span class="ticker-sep" aria-hidden="true">❦</span>
+          <span class="ticker-item" aria-hidden="true"><span class="ticker-quote">The whole process was seamless</span><span class="ticker-attrib">Will · E-commerce</span></span>
+          <span class="ticker-sep" aria-hidden="true">❦</span>
+          <span class="ticker-item" aria-hidden="true"><span class="ticker-quote">I'm blown away by the quality of the candidates</span><span class="ticker-attrib">Charlotte · Growth Consultancy</span></span>
+          <span class="ticker-sep" aria-hidden="true">❦</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Three-beat: Claim, Complication, Solution -->
+<div class="three-beat">
+<section id="premise">
+  <div class="wrap">
+    <div class="eyebrow">Great employees. A fraction of the cost.</div>
+    <div class="two-col">
+      <h2>You can hire great full-time overseas employees for <em>as little as £9k per year.</em></h2>
+      <div class="prose">
+        <ul class="value-list">
+          <li>Excellent English skills, with years of experience working remotely for US and UK companies ensuring effortless collaboration.</li>
+          <li>Extensive experience in marketing, finance, sales, operations, customer service, and more.</li>
+          <li>Up to 70% savings compared to UK-based hires.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="hard-part" class="pivot">
+  <div class="wrap">
+    <div class="eyebrow pivot-eyebrow">In practice…</div>
+    <h2 class="pivot-h2">…but it's hard to find <em>the good ones.</em></h2>
+  </div>
+</section>
+<section id="experience">
+  <div class="wrap">
+    <div class="eyebrow">That's where we come in</div>
+    <div class="two-col">
+      <h2>We've been doing this <em>for a long time.</em></h2>
+      <div class="prose">
+        <ul class="value-list">
+          <li>15+ years building overseas teams for our own businesses.</li>
+          <li>Headhunter team based in the overseas.</li>
+          <li>Access pre-vetted candidates, fluent in English and professionally trained.</li>
+          <li>Risk-free hiring — only pay when you make the hire, and every placement is backed by a 6-month guarantee.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- How it works (4 steps) -->
+<section id="how">
+  <div class="wrap">
+    <div class="eyebrow">How it works</div>
+    <h2>What to expect when you work with us</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">STEP 01</div>
+        <h3>Tell us the role</h3>
+        <p>Tell us about the role you are looking to fill: responsibilities, ideal candidate profile, must-haves. We will provide feedback on the salary expectations.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">STEP 02</div>
+        <h3>We search</h3>
+        <p>We begin the search. We'll interview and screen until we have 3 great candidates who fit your brief.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">STEP 03</div>
+        <h3>You choose</h3>
+        <p>We'll present our top 3 candidates. We'll then help you schedule interviews with each of them, so you can choose your favourite.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">STEP 04</div>
+        <h3>They start</h3>
+        <p>We help negotiate salary, start date and contract. Before their start date you pay our fee of 30% of assumed first year salary.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- What's possible (revised) -->
+<section id="possible" class="possible-r">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow head-eyebrow">What's possible</div>
+        <h2>Great hires. <em>A fraction of the cost.</em></h2>
+      </div>
+      <p class="possible-foot-note">A sample of recent placements. Figures are annual; overseas averages reflect fully-loaded cost.</p>
+    </div>
+    <div class="tier-grid">
+      <article class="tier">
+        <header class="tier-head">
+          <div class="tier-eyebrow">Role 01</div>
+          <h3 class="tier-title">Finance</h3>
+        </header>
+        <dl class="tier-rows">
+          <div class="tier-row">
+            <dt class="tier-label">overseas <span>annual</span></dt>
+            <dd class="tier-figure tier-figure--ph">£9k — £12k</dd>
+          </div>
+        </dl>
+        <footer class="tier-foot">
+          <div class="tier-foot-label">You save</div>
+          <div class="tier-foot-fig">~70<span class="pct">%</span></div>
+          <div class="tier-foot-cap">Save <strong>£23k</strong> per year</div>
+        </footer>
+      </article>
+      <article class="tier">
+        <header class="tier-head">
+          <div class="tier-eyebrow">Role 02</div>
+          <h3 class="tier-title">Operations</h3>
+        </header>
+        <dl class="tier-rows">
+          <div class="tier-row">
+            <dt class="tier-label">overseas <span>annual</span></dt>
+            <dd class="tier-figure tier-figure--ph">£11k — £14k</dd>
+          </div>
+        </dl>
+        <footer class="tier-foot">
+          <div class="tier-foot-label">You save</div>
+          <div class="tier-foot-fig">~67<span class="pct">%</span></div>
+          <div class="tier-foot-cap">Save <strong>£24k</strong> per year</div>
+        </footer>
+      </article>
+      <article class="tier">
+        <header class="tier-head">
+          <div class="tier-eyebrow">Role 03</div>
+          <h3 class="tier-title">Marketing</h3>
+        </header>
+        <dl class="tier-rows">
+          <div class="tier-row">
+            <dt class="tier-label">overseas <span>annual</span></dt>
+            <dd class="tier-figure tier-figure--ph">£14k — £18k</dd>
+          </div>
+        </dl>
+        <footer class="tier-foot">
+          <div class="tier-foot-label">You save</div>
+          <div class="tier-foot-fig">~66<span class="pct">%</span></div>
+          <div class="tier-foot-cap">Save <strong>£29k</strong> per year</div>
+        </footer>
+      </article>
+    </div>
+    <div class="tier-also">
+      <span class="tier-also-lead">Also placed —</span>
+      <span class="tier-also-roles">Sales <em>·</em> Customer Service <em>·</em> Executive Assistants <em>·</em> Admin <em>·</em> Design <em>·</em> Development <em>·</em> and more</span>
+    </div>
+  </div>
+</section>
+
+<!-- Salary guide -->
+<section id="salary-guide">
+  <div class="wrap">
+    <div class="eyebrow">Salary guide</div>
+    <div class="salary-grid">
+      <div class="salary-copy">
+        <h2>Not ready to chat? <em>Get the numbers first.</em></h2>
+        <p>The 2026 Salary Comparison Guide. Twelve roles, UK vs Overseas, eighteen pages of figures. Sent straight to your inbox.</p>
+        <form class="salary-form" action="#" method="post" onsubmit="event.preventDefault(); this.querySelector('button').textContent = 'Check your inbox';">
+          <input type="text" name="name" placeholder="Full name" required />
+          <input type="email" name="email" placeholder="Work email" required />
+          <button type="submit" class="cta accent">Download the guide</button>
+        </form>
+      </div>
+      <div class="guide-mock" aria-hidden="true">
+        <div class="logo-row">
+          <span class="mark">§</span>
+          <span class="name">Hire Anywhere</span>
+        </div>
+        <div class="edition">2026 Edition</div>
+        <div class="title">The Salary Comparison Guide</div>
+        <div class="inside-label">Inside</div>
+        <ul>
+          <li>Bookkeeper</li>
+          <li>Executive Assistant</li>
+          <li>Customer service lead</li>
+          <li>Operations admin</li>
+          <li>Marketing executive</li>
+          <li class="more">Seven more roles</li>
+        </ul>
+        <div class="footer-strip">12 roles · UK vs Overseas · 18 pages</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Next step -->
+<section id="book" class="next-step next-centred">
+  <div class="wrap">
+    <div class="eyebrow next-eyebrow">Next step</div>
+    <h2 class="next-h2">The hire you've been putting off <em>— at a price that finally makes sense.</em></h2>
+    <a href="start-hiring.html" class="cta-block">Start Hiring <span class="arrow">→</span></a>
+    <p class="next-reassure"><em>Zero risk.</em> Only pay when you hire.</p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="index.html" class="logo footer-logo"><span class="mark">§</span>Hire Anywhere</a>
+      <p class="footer-copy">© 2026 Hire Anywhere</p>
+    </div>
+    <nav class="footer-nav" aria-label="Pages">
+      <a href="index.html">Home</a>
+      <a href="success-stories.html">Success stories</a>
+      <a href="salary-guide.html">Salary guide</a>
+      <a href="careers.html">Careers</a>
+      <a href="contact.html">Contact us</a>
+      <a href="partners.html">Partner with us</a>
+    </nav>
+    <nav class="footer-legal" aria-label="Legal">
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+    </nav>
+  </div>
+</footer>
+<script>
+(function(){
+  var t=document.querySelector('.nav-trigger'),
+      d=document.querySelector('.nav-dropdown');
+  if(t&&d){
+    t.addEventListener('click',function(e){
+      e.stopPropagation();
+      d.classList.toggle('is-open');
+      t.setAttribute('aria-expanded',d.classList.contains('is-open'));
+    });
+    t.addEventListener('keydown',function(e){
+      if(e.key==='Enter'||e.key===' '){
+        e.preventDefault();
+        d.classList.toggle('is-open');
+        t.setAttribute('aria-expanded',d.classList.contains('is-open'));
+      }
+    });
+    document.addEventListener('click',function(){if(d)d.classList.remove('is-open');});
+  }
+})();
+</script>
+</body>
+</html>
